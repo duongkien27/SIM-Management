@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIM Card Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-sim-card"></i> SIM Card Management System</h1>
+            <p>Track and manage SIM card borrowing in your company</p>
+        </header>
+
+        <div class="controls">
+            <button id="addSimBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New SIM Card
+            </button>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search SIM cards...">
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalSims">0</div>
+                <div class="stat-label">Total SIM Cards</div>
+            </div>
+            <div class="stat-card available">
+                <div class="stat-number" id="availableSims">0</div>
+                <div class="stat-label">Available</div>
+            </div>
+            <div class="stat-card borrowed">
+                <div class="stat-number" id="borrowedSims">0</div>
+                <div class="stat-label">Borrowed</div>
+            </div>
+        </div>
+
+        <div class="sim-grid" id="simGrid">
+            <!-- SIM cards will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Add/Edit SIM Modal -->
+    <div id="simModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New SIM Card</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="simForm">
+                <div class="form-group">
+                    <label for="simNumber">SIM Card Number:</label>
+                    <input type="text" id="simNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="carrier">Carrier:</label>
+                    <select id="carrier" required>
+                        <option value="">Select Carrier</option>
+                        <option value="Verizon">Verizon</option>
+                        <option value="AT&T">AT&T</option>
+                        <option value="T-Mobile">T-Mobile</option>
+                        <option value="Sprint">Sprint</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" id="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="dataLimit">Data Limit (GB):</label>
+                    <input type="number" id="dataLimit" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save SIM Card</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Borrow/Return Modal -->
+    <div id="actionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="actionModalTitle">Borrow SIM Card</h2>
+                <span class="close" onclick="closeActionModal()">&times;</span>
+            </div>
+            <div id="actionModalBody">
+                <div class="form-group">
+                    <label for="borrowerName">Borrower Name:</label>
+                    <input type="text" id="borrowerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="borrowerEmail">Email:</label>
+                    <input type="email" id="borrowerEmail">
+                </div>
+                <div class="form-group">
+                    <label for="department">Department:</label>
+                    <input type="text" id="department">
+                </div>
+                <div class="form-group">
+                    <label for="borrowPurpose">Purpose:</label>
+                    <textarea id="borrowPurpose" rows="2" placeholder="Reason for borrowing..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="expectedReturnDate">Expected Return Date:</label>
+                    <input type="date" id="expectedReturnDate">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeActionModal()">Cancel</button>
+                <button type="button" id="actionBtn" class="btn btn-primary">Borrow</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
